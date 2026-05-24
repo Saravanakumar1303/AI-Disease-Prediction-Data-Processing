@@ -5,15 +5,16 @@
 📌 Project Overview
 Many diseases in the UK are diagnosed too late — diabetes, heart disease, kidney disease, and more. This project builds an AI system that:
 
-Predicts diseases at early stages using patient data
-Supports doctors in making faster, data-driven decisions
-Enables preventive healthcare through risk scoring
+> Predicts diseases at early stages using patient data
+> Supports doctors in making faster, data-driven decisions
+> Enables preventive healthcare through risk scoring
 
 Built for: UK Healthcare Clinics
 Role: Python Development 
 Timeline: 80-Day Project
 
-| Disease | Dataset | Rows | Columns | Source |
+[Raw Dataset]
+| Disease | Dataset | Rows | Columns | Source | 
 |---------|---------|------|---------|--------|
 | Diabetes | Pima Indians Diabetes | 768 | 9 | Kaggle |
 | Heart Disease | Heart Disease UCI | 303 | 14 | Kaggle |
