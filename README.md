@@ -100,10 +100,10 @@ pip install -r requirements.txt
 ### 3. Run Preprocessing
 ```bash
 # Diabetes
-python preprocessing/diabetes_preprocessing.py
+diabetes_clean.py
 
 # Heart (coming soon)
-python preprocessing/heart_preprocessing.py
+heart_clean.py
 ```
 
 ---
