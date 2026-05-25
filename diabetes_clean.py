@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-df =pd.read_csv("datasets/diabetes.csv")
+df =pd.read_csv("raw_datasets/diabetes.csv")
 
 # 1. These columns can't be 0 medically
 zero_not_allowed = ['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']
