@@ -24,7 +24,7 @@ Timeline: 80-Day Project
 
 ## 🧹 Week 2 — Data Preprocessing Progress
 
-### ✅ Day 1 — Diabetes Dataset (`diabetes_preprocessing.py`)
+### ✅ Day 1 — Diabetes Dataset (`diabetes_clean.py`)
 
 **Issues Found:**
 
@@ -65,8 +65,22 @@ Data     : Real patients only — no synthetic data
 
 ---
 
-### ⏳ Day 2 — Heart Disease Dataset (`heart_preprocessing.py`)
-> Coming soon
+### ⏳ Day 2 — Heart Disease Dataset (`heart_clean.py`)
+Step 1 :Invalid zeros → NaN → Median fill
+Step 2: IQR Winsorization — 20 outliers capped
+Step 3: Duplicates removed + Columns renamed.
+Step 4: stratify=y — class ratio preserved.
+Step 5: StandardScaler — normalize.
+Step 6: class_weight='balanced' — no SMOTE
+
+📊 Model Result
+Model    : Random Forest Classifier
+Accuracy : 80.33%
+Data     : Real patients only — no synthetic data
+
+Precision : 76.92%
+Recall    : 90.91%   ← Heart disease patients 91% detect ✅
+F1 Score  : 83.33%
 
 ---
 
