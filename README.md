@@ -124,6 +124,7 @@ pip install pandas numpy scikit-learn
 diabetes_clean.py
 heart_clean.py
 liver_clean.py
+kidney_clean.py
 ```
 
 ## 🛠️ Tech Stack
