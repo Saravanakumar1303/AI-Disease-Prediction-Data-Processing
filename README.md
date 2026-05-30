@@ -116,9 +116,10 @@ Raw CSV → Handle Missing Values → Fix Invalid Values → Remove Duplicates
 
 | Disease | Best Model | Accuracy | Precision | Recall | F1 Score |
 |---|---|---|---|---|---|
-| 🩸 Diabetes | Random Forest | ~76% | — | — | — |
-| ❤️ Heart Disease | *(run to get results)* | — | — | — | — |
-| 🫀 Liver Disease | *(run to get results)* | — | — | — | — |
+| 🩸 Diabetes | Random Forest | 75.32% | 67% | 57% | 62% |
+| ❤️ Heart Disease | SVM | 85.25% | 80.00% | 96.97% | 87.67% |
+| 🫀 Liver Disease | KNN | 74.56% | 78.26% | 88.89% | 83.24% |
+| 🫘 Kidney Disease | Random Forest | 100.00% | 100.00% | 100.00% | 100.00% |
 
 > ⚠️ *Run the respective `.py` files to get exact metrics. The best model is auto-selected and printed at the end of each script.*
 
