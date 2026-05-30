@@ -65,6 +65,17 @@
 | 6 | **Target Column Issues** | Column named `Dataset`, values `1=Disease`, `2=No Disease` — confusing | Renamed to `target`, recoded `2 → 0` (standard binary: `1=Disease`, `0=No Disease`) |
 | 7 | **Class Imbalance** | 71.4% liver patients vs 28.6% healthy | Noted for model evaluation; addressed via `stratify=y` in train-test split |
 
+### 4. 🫘 Chronic Kidney Dataset (`kidney_clean.csv`)
+
+| # | Issue | Details | Fix Applied |
+|---|---|---|---|
+| 1 | **Missing Values** | `rc` 32.5%, `rbc` 38%, `wc` 26.25%, `pot` 22%, `sod` 21.75%, `pcv` 17.5% — 24 columns-ல் missing data | Numeric columns → **Median**, Categorical columns → **Mode** |
+| 2 | **Wrong Dtype** | `pcv`, `wc`, `rc` — numeric values ஆனா `string` type-ல store ஆகி இருக்கு | `str.strip()` → `pd.to_numeric(errors='coerce')` |
+| 3 | **Dirty String Values** | `dm` column-ல `' yes'`, `'\tno'`, `'\tyes'` — leading spaces & tab characters | `.str.strip().str.lower()` applied on all 10 categorical columns |
+| 4 | **Target Label Dirt** | `classification` column-ல `'ckd\t'` — trailing tab character | `.str.strip()` → map `'ckd'→1`, `'notckd'→0` |
+| 5 | **Unnecessary Column** | `id` column — ML-க்கு useless | `df.drop(columns=['id'])` |
+| 6 | **Label Encoding** | `rbc`, `pc`, `pcc`, `ba`, `htn`, `dm`, `cad`, `appet`, `pe`, `ane` — 10 categorical columns | `LabelEncoder` → all converted to int64 |
+| 7 | **Class Imbalance** | 62.5% CKD patients vs 37.5% healthy | `stratify=y` in train-test split |
 ---
 
 ## ⚙️ Preprocessing Pipeline (All Datasets)
@@ -76,7 +87,6 @@ Raw CSV → Handle Missing Values → Fix Invalid Values → Remove Duplicates
        → StandardScaler → Model Training
 ```
 
----
 
 ## 🤖 Model Training
 
