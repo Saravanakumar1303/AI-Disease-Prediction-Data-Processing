@@ -76,6 +76,19 @@
 | 5 | **Unnecessary Column** | `id` column - useless for ML Process | `df.drop(columns=['id'])` |
 | 6 | **Label Encoding** | `rbc`, `pc`, `pcc`, `ba`, `htn`, `dm`, `cad`, `appet`, `pe`, `ane` — 10 categorical columns | `LabelEncoder` → all converted to int64 |
 | 7 | **Class Imbalance** | 62.5% CKD patients vs 37.5% healthy | `stratify=y` in train-test split |
+
+### 5. 🦠 Disease & Symptoms Dataset (DiseaseAndSymptoms_Clean.csv)
+| # | Issue | Details | Fix Applied |
+|---|---|---|---|
+| 1 | **Dirty String Values** | `Symptom_1` to `Symptom_17` — leading/trailing spaces & mixed case (e.g., `' Itching'`, `'FATIGUE '`, `'fever'`) | `.str.strip().str.lower()` applied on all 17 symptom columns + `Disease` column |
+| 2 | **Duplicate Rows** | 4920 raw rows — exact duplicate disease+symptom combinations exist; order-insensitive duplicates also present (same symptoms in different column positions) | `frozenset` key per row (Disease + symptom-set) → `duplicated()` drop → unique rows only |
+| 3 | **Wrong Structure for ML** | Raw format: 1 `Disease` col + 17 `Symptom_1…Symptom_17` cols — positional, sparse, string-based; unusable directly for ML | Pivoted to **binary encoding**: 131 unique symptoms → each becomes a column (0/1 flag); `Disease` as label |
+| 4 | **Sparse / NaN Symptom Slots** | Many rows use only 3–7 of the 17 symptom slots; remaining are `NaN` | `NaN` slots skipped during `frozenset` construction — no imputation needed; binary matrix handles naturally |
+| 5 | **No Numeric Target** | `Disease` column is a string label (41 classes) | Kept as string for multi-class classification; `stratify=y` in train-test split to preserve class distribution |
+| 6 | **Class Imbalance Risk** | 41 disease classes — unequal representation after dedup | `stratify=y` in `train_test_split` + `StratifiedKFold(n_splits=5)` for cross-validation |
+| 7 | **Unnecessary Metadata Columns** | None (dataset only has Disease + Symptom cols) | N/A — no drop needed |
+```
+
 ---
 
 ## ⚙️ Preprocessing Pipeline (All Datasets)
@@ -120,6 +133,8 @@ Raw CSV → Handle Missing Values → Fix Invalid Values → Remove Duplicates
 | ❤️ Heart Disease | SVM | 85.25% | 80.00% | 96.97% | 87.67% |
 | 🫀 Liver Disease | KNN | 74.56% | 78.26% | 88.89% | 83.24% |
 | 🫘 Kidney Disease | Random Forest | 100.00% | 100.00% | 100.00% | 100.00% |
+| 🦠 Disease and Symptoms | Random Forest | 100.00% | 100.00% | 100.00% | 100.00% |
+
 
 > ⚠️ *Run the respective `.py` files to get exact metrics. The best model is auto-selected and printed at the end of each script.*
 
@@ -136,6 +151,8 @@ diabetes_clean.py
 heart_clean.py
 liver_clean.py
 kidney_clean.py
+disease_symptoms_clean.py
+
 ```
 
 ## 🛠️ Tech Stack
